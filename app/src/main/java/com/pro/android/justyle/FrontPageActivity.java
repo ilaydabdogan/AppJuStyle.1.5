@@ -1,5 +1,6 @@
 package com.pro.android.justyle;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -29,6 +30,8 @@ public class FrontPageActivity extends AppCompatActivity implements FragmentActi
     private ImageButton mCameraButton;
     public static String userUid;
 
+    @SuppressLint("StaticFieldLeak")
+    protected static View frontView;
     static boolean isWifiConn = false;
     static int level;
     static int scale;
@@ -44,7 +47,9 @@ public class FrontPageActivity extends AppCompatActivity implements FragmentActi
         mProfileButton =  findViewById(R.id.ProfileButton);
         mMoreButton =  findViewById(R.id.MoreButton);
         mCameraButton =  findViewById(R.id.CameraButton);
-
+        frontView = (View) findViewById(R.id.fpView);
+        frontView.setBackgroundColor(getResources().getColor(ProfileActivity.mBackgroundColor));
+        updateView();
 
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -81,6 +86,7 @@ public class FrontPageActivity extends AppCompatActivity implements FragmentActi
         mActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 startActivity(new Intent(FrontPageActivity.this,FrontPageActivity.class));
 
             }
@@ -88,7 +94,7 @@ public class FrontPageActivity extends AppCompatActivity implements FragmentActi
         mMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   startActivity(new Intent(FrontPageActivity.this,MarketplaceActivity.class));
+                startActivity(new Intent(FrontPageActivity.this,MoreActivity.class));
             }
         });
         mCameraButton.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +139,7 @@ public class FrontPageActivity extends AppCompatActivity implements FragmentActi
         mFragmentTransaction.addToBackStack(null);
         mFragmentTransaction.commit();
     }
+
     private void addMarketplaceFragment() {
         mFragmentTransaction = mFragmentManager.beginTransaction();
 
@@ -145,6 +152,10 @@ public class FrontPageActivity extends AppCompatActivity implements FragmentActi
         mFragmentTransaction.addToBackStack(null);
         mFragmentTransaction.commit();
 
+    }
+
+    public void updateView(){
+        frontView.setBackgroundColor(getResources().getColor(ProfileActivity.mBackgroundColor));
     }
 
     @Override

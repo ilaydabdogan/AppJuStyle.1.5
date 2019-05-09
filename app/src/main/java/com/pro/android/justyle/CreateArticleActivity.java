@@ -67,7 +67,7 @@ public class CreateArticleActivity extends AppCompatActivity {
         mUserName = findViewById(R.id.createUserName);
 
 
-       // mArticleImg.setImageURI(mImageUri);
+        // mArticleImg.setImageURI(mImageUri);
         Picasso.get()
                 .load(mImageUri)
                 .resize(600,600)
@@ -76,7 +76,7 @@ public class CreateArticleActivity extends AppCompatActivity {
 
 
         // get the user name
-      //  mUserName
+        //  mUserName
 
 
 
@@ -88,14 +88,14 @@ public class CreateArticleActivity extends AppCompatActivity {
         //use user uid to create a wardrobe for them
 
 
-                mStorageRef = FirebaseStorage.getInstance().getReference(userUid);
-                mDatabaseRef = FirebaseDatabase.getInstance().getReference(userUid);// this creates unique wardrobe
+        mStorageRef = FirebaseStorage.getInstance().getReference(userUid);
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference(userUid);// this creates unique wardrobe
         //mDatabaseRef = FirebaseDatabase.getInstance().getReference("marketplace");
         mCreateButton.setOnClickListener(   new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (isWifiConn) {// if connected to wifi
+                if (isWifiConn || MoreActivity.mWifiCare) {// if connected to wifi
 
                     if (mUploadTask != null && mUploadTask.isInProgress()) {
                         // if there is already an upload task on progress we don't want to upload same pictures
@@ -182,10 +182,11 @@ public class CreateArticleActivity extends AppCompatActivity {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
     }
-   private void openMyWardrobeActivity(){
+    private void openMyWardrobeActivity(){
+        finish();
         Intent intent = new Intent(this, MyWardrobeActivity.class);
         startActivity(intent);
-   }
+    }
 
 
 }

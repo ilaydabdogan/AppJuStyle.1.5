@@ -23,6 +23,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button mRegisterButton;
     private EditText mEditTextEmail;
     private EditText mEditTextPassword;
+    private EditText mConfirmPassword;
     private TextView mTextViewSignIn;
     private ProgressDialog mProgressDialog;
     private FirebaseAuth mFirebaseAuth;
@@ -44,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
         mEditTextPassword = (EditText) findViewById(R.id.editTextPassword);
         mTextViewSignIn = (TextView) findViewById(R.id.textViewSignIn);
         mRegisterButton = (Button) findViewById(R.id.RegisterButton);
-
+        mConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
         mProgressDialog = new ProgressDialog(this);
 
         mTextViewSignIn.setOnClickListener(new View.OnClickListener(){
@@ -64,18 +65,25 @@ public class SignUpActivity extends AppCompatActivity {
     private void registerUser(){
         String email = mEditTextEmail.getText().toString().trim();
         String password = mEditTextPassword.getText().toString().trim();
+        String passwordConfirmed = mConfirmPassword.getText().toString().trim();
+
 
         if (TextUtils.isEmpty(email)){
             Toast.makeText(this, "Enter Email, please", Toast.LENGTH_SHORT).show();
-
             return;
-
         }
 
         if (TextUtils.isEmpty(password)){
             Toast.makeText(this,"Enter Password, please",Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if (!password.equals(passwordConfirmed)){
+            Toast.makeText(this, "Password Confirmation must match password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         //if validation is ok you will end up here
         mProgressDialog.setMessage("Registering User, Please Wait...");
         mProgressDialog.show();

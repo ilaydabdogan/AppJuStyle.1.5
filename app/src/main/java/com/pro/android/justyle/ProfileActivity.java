@@ -21,12 +21,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import android.content.SharedPreferences;
+import android.widget.Switch;
+
 
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivity";
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String BACK_COLOR = "Back_Color";
+    public static final String TEXT_COLOR = "Text_Color";
+    public static final String DARKSWITCH = "darkSwitch";
 
-
+    private String name;
     private TextView mTextViewNickname;
     private Button mButtonLogOut;
     private FirebaseAuth mFirebaseAuth;
@@ -36,6 +43,12 @@ public class ProfileActivity extends AppCompatActivity {
     private Button mButtonAddInfo;
     private Button DeleteProfile;
     private FirebaseUser mCurrentUser;
+    private Switch mDarkSwitch;
+    protected static int mBackgroundColor = R.color.backgroundColor;
+    private boolean switchOnOff;
+    private View profileView;
+    private Button mDarkButton;
+    private Boolean mChecked;
 
 
     @Override
@@ -47,6 +60,11 @@ public class ProfileActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mCurrentUser = mFirebaseAuth.getCurrentUser();
         DeleteProfile = (Button) findViewById(R.id.DeleteProfile);
+
+        mDarkSwitch = (Switch) findViewById(R.id.darkSwitch);
+        mDarkButton = (Button) findViewById(R.id.darkButton);
+        profileView = findViewById(R.id.pView);
+        String userID = mCurrentUser.getUid();
 
 
 
@@ -117,6 +135,29 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        if (mDarkSwitch.isChecked()){
+            mChecked = true;
+        } else if (!mDarkSwitch.isChecked()){
+            mChecked = false;
+        }
+
+        mDarkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mBackgroundColor == R.color.backgroundColor){
+                    mBackgroundColor = R.color.darkBackgroundColor;
+                    mDarkSwitch.setChecked(true);
+                } else if (mBackgroundColor == R.color.darkBackgroundColor){
+                    mBackgroundColor = R.color.backgroundColor;
+                    mDarkSwitch.setChecked(false);
+                }
+                saveData();
+                updateView();
+            }
+        });
+        loadData();
+
     }
     private void saveUserInformation(){
         Map<String, Object> user = new HashMap<>();
@@ -128,4 +169,31 @@ public class ProfileActivity extends AppCompatActivity {
 
         mFirebaseFirestore.collection("users").document(mCurrentUser.getUid()).set(user);
     }
+
+
+    public void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(BACK_COLOR, mBackgroundColor);
+        editor.putBoolean(DARKSWITCH, mChecked);
+        editor.apply();
+    }
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        mBackgroundColor = sharedPreferences.getInt(BACK_COLOR,R.color.backgroundColor);
+        switchOnOff = sharedPreferences.getBoolean(DARKSWITCH, false);
+        updateView();
+    }
+
+    public void updateView(){
+        profileView.setBackgroundColor(getResources().getColor(mBackgroundColor));
+        FrontPageActivity.frontView.setBackgroundColor(getResources().getColor(mBackgroundColor));
+    }
 }
+
+
+
+
+
+

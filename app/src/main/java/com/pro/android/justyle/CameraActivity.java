@@ -34,7 +34,7 @@ import static java.text.DateFormat.getDateTimeInstance;
 public class CameraActivity extends AppCompatActivity {
 
 
-     public static   String pathToFile;
+    public static   String pathToFile;
 
 
 
@@ -48,7 +48,7 @@ public class CameraActivity extends AppCompatActivity {
 
 
 
-        if (bpt > 10) { //batter level
+        if (bpt > 10 || MoreActivity.mBatteryCare) { //batter level
             dispatchPictureTakenAction();
         }
         else {
@@ -65,7 +65,7 @@ public class CameraActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK) {
             if(requestCode == 1) {
-              //  Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
+                //  Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
                 //cameraImageView.setImageBitmap(bitmap);
 
               /*  Picasso.with(CameraActivity.this)
@@ -75,10 +75,10 @@ public class CameraActivity extends AppCompatActivity {
 //                Intent i = new Intent();
 
                 // Throw in some identifier
-  //              i.putExtra (pathToFile, pathToFile);
+                //              i.putExtra (pathToFile, pathToFile);
 
                 // Set the result with this data, and finish the activity
-    //            setResult(RESULT_OK, i);
+                //            setResult(RESULT_OK, i);
 
 
                 finish();
@@ -113,7 +113,7 @@ public class CameraActivity extends AppCompatActivity {
     File image = null;
 
     private File createPhotoFile() {
-       String name = new SimpleDateFormat("yyyyMMdd_MMmmss").format(new Date());
+        String name = new SimpleDateFormat("yyyyMMdd_MMmmss").format(new Date());
         File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         try {
             image = File.createTempFile(name, ".jpg", storageDir);

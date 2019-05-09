@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">JuStyle</string>
     <string name="Email_Hint">Enter your Email</string>
-    <string name="password_Hint">Enter your password</string>
     <string name="Register">Register User</string>
     <string name="Registered">Already Registered? Sign In Here</string>
     <string name="Login">Log In</string>
@@ -26,5 +25,13 @@
     <string name="useCamera">Use Camera</string>
     <string name="search">Search</string>
     <string name="deleteProfileButton">Delete Profile</string>
+    <string name="wifi_activate">allow uploading without wifi</string>
+    <string name="battery_activate">allow picture taking with less than 10% battery</string>
+    <string name="ON">ON</string>
+    <string name="OFF">OFF</string>
+    <string name="DarkMode">Dark Mode</string>
+    <string name="password_Hint">Enter your password</string>
+
+
 
 </resources>

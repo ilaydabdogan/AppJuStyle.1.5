@@ -101,6 +101,7 @@ public class WardrobeFragment extends Fragment implements View.OnClickListener {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getFragmentManager().popBackStack();
                 Intent intent = new Intent(getActivity(), CreateArticleActivity.class);
                 startActivity(intent);
 

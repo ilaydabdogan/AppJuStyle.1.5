@@ -5,6 +5,12 @@
     <color name="colorAccent">#D81B60</color>
     <color name="barColor">#B3000000</color>
     <color name="header">#9C27B0</color>
+    <color name="backgroundColor">#FFE9E9</color>
+    <color name="darkBackgroundColor">#501E1E</color>
+    <color name="textColor">#000</color>
+    <color name="textColorDark">#E6E6E6</color>
+    <color name="green">#19B419</color>
+    <color name="red">#B41919</color>
 
     <color name="text">#ffffff</color>
     <color name="shadow">#505050</color>

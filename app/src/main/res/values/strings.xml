@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">JuStyle</string>
+    <string name="Email_Hint">Enter your Email</string>
+    <string name="password_Hint">Enter your password</string>
+    <string name="Register">Register User</string>
+    <string name="Registered">Already Registered? Sign In Here</string>
+    <string name="Login">Log In</string>
+    <string name="NotRegistered">Don\'t have an account? Sign up Here</string>
+    <string name="SignUp">Sign Up</string>
+    <string name="uploadPicToCreateArticle">Upload Picture To Create Article</string>
+    <string name="LogOut">Log Out</string>
+    <string name="profile">MyJuStyle</string>
+    <string name="More">More</string>
+    <string name="Activities">Front Page</string>
+    <string name="AddInfo">Add Profile Information</string>
+    <string name="NameHint">Enter your Name</string>
+    <string name="AddressHint">Enter your Address</string>
+    <string name="UploadButtonId">Upload Picture</string>
+    <string name="ChooseButtonId">Choose</string>
+    <string name="CreateArticleText">Please write description here</string>
+    <string name="CreateArticle">Create Article</string>
+    <string name="ArticleNameId">Please Enter a Name</string>
+    <string name="TakePic">Take Picture</string>
+    <string name="marketplaceText">Marketplace</string>
+    <string name="myWardrobeText">My Wardrobe</string>
+    <string name="useCamera">Use Camera</string>
+    <string name="search">Search</string>
+    <string name="deleteProfileButton">Delete Profile</string>
+
+</resources>

@@ -76,8 +76,6 @@ public class CreateArticleActivity extends AppCompatActivity {
 
 
         // get the user name
-        //  mUserName
-
 
 
 

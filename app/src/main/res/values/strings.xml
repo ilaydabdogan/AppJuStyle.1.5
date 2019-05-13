@@ -31,7 +31,9 @@
     <string name="OFF">OFF</string>
     <string name="DarkMode">Dark Mode</string>
     <string name="password_Hint">Enter your password</string>
-
+    <string name="viewArticleName">Item name</string>
+    <string name="viewArticleDescription">Missing Description</string>
+    <string name="viewArticleUsername">Unknown user</string>
 
 
 </resources>

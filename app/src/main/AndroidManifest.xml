@@ -26,6 +26,7 @@
         <activity android:name=".MyWardrobeActivity"/>
         <activity android:name=".MarketplaceActivity"/>
         <activity android:name=".ViewArticleActivity"/>
+        <activity android:name=".ViewMyWardrobeArticleActivity"/>
         <activity android:name=".MoreActivity"/>
 
 

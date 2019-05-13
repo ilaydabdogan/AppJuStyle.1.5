@@ -8,22 +8,20 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 // import android.widget.Toolbar;
 
-import com.google.android.gms.dynamic.OnDelegateCreatedListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,10 +29,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -48,12 +46,8 @@ public class MarketplaceActivity extends AppCompatActivity implements ImageAdapt
     private ValueEventListener mDBListener;
     private List<Upload> mUploads;
     MaterialSearchView searchView;
-    ImageButton LikepostButton, CommentPostButton;
-    TextView displayNoOfLikes;
     EditText editText;
     private String mPostKey;
-    
-  //  Boolean LikeChecker = false;
 
 
 
@@ -62,35 +56,12 @@ public class MarketplaceActivity extends AppCompatActivity implements ImageAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.marketplace);
 
-     //   LikepostButton = (ImageButton) mRecyclerView.findViewById(R.id.like_button);
-    //    CommentPostButton = (ImageButton) mRecyclerView.findViewById(R.id.commentButton);
-    //    displayNoOfLikes = (TextView) mRecyclerView.findViewById(R.id.display_no_of_likes);
 
-     //   LikepostButton.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-         //   public void onClick(View v) {
-         //       LikeChecker = true;
-  /*              LikeRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-                    {
-                        if(dataSnapshot.child(PostKey).hasChild(currentUserID))
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-*/       // });
 
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        editText = (EditText)findViewById(R.id.searchView);
+        editText =findViewById(R.id.searchView);
 
       // Search bar, TextWatcher allow us to instantly update data on other views
         editText.addTextChangedListener(new TextWatcher() {
@@ -183,7 +154,6 @@ public class MarketplaceActivity extends AppCompatActivity implements ImageAdapt
      }
  });
 
-
     }
 
 
@@ -196,11 +166,15 @@ public class MarketplaceActivity extends AppCompatActivity implements ImageAdapt
         viewActivityIntent.putExtra("item_key", mPostKey);
         startActivity(viewActivityIntent);
     }
+   /* @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("Select Action");
 
-    @Override
-    public void onModifyClick(int position) {
 
-    }
+        MenuItem sendToMarketplace = menu.add(Menu.NONE, 1, 1, "I am marketplace");
+        MenuItem delete = menu.add(Menu.NONE, 2, 2, "Delete");
+
+    }*/
 
     @Override
     public void sendToMarketClick(int position) {

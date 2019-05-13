@@ -1,11 +1,13 @@
 package com.pro.android.justyle;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -32,8 +34,7 @@ import java.util.Map;
 import static com.pro.android.justyle.FrontPageActivity.userUid;
 
 
-public class MyWardrobeActivity extends AppCompatActivity implements ImageAdapter.OnItemClickListener {
-    private RecyclerView mRecyclerView;
+public class MyWardrobeActivity extends AppCompatActivity implements ImageAdapter.OnItemClickListener{
     private  ImageAdapter mAdapter;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
@@ -41,7 +42,7 @@ public class MyWardrobeActivity extends AppCompatActivity implements ImageAdapte
     ImageButton btnSearch;
     EditText edtKeyword;
     String Keyword;
-
+    private String mPostKey;
 
 
     private List<Upload> mUploads;
@@ -52,13 +53,14 @@ public class MyWardrobeActivity extends AppCompatActivity implements ImageAdapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_wardrobe);
 
-        mRecyclerView = findViewById(R.id.recycler_view);
+        RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mUploads = new ArrayList<>();
 
         mAdapter = new ImageAdapter(MyWardrobeActivity.this, mUploads);
+
+    //    wardrobeClassName =  this.getLocalClassName();
 
 
         mRecyclerView.setAdapter(mAdapter);
@@ -82,11 +84,6 @@ public class MyWardrobeActivity extends AppCompatActivity implements ImageAdapte
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-              /*  MenuAPI += "&keyword="+Keyword;
-                IOConnect = 0;
-                listMenu.invalidateViews();
-                clearData();
-                new getDataTask().execute();*/
             }
         });
 
@@ -123,22 +120,22 @@ public class MyWardrobeActivity extends AppCompatActivity implements ImageAdapte
     }
 
 
-    @Override
+
+        @Override
     public void onItemClick(int position) {
         Toast.makeText(this, "View article "+ position, Toast.LENGTH_SHORT).show();
 
+            //Gets the article Key from Firebase
+            mPostKey = mUploads.get(position).getKey();
+            //Sends the article Key to the viewArticle activity
+            Intent viewActivityIntent = new Intent(MyWardrobeActivity.this, ViewMyWardrobeArticleActivity.class);
+            viewActivityIntent.putExtra("item_wardrobe_key", mPostKey);
+            startActivity(viewActivityIntent);
 
 
+        }
 
 
-
-    }
-
-    @Override
-    public void onModifyClick(int position) {
-        Toast.makeText(this, "Modify, click  at position "+ position, Toast.LENGTH_SHORT).show();
-        // modify
-    }
 
 
     @Override
@@ -202,8 +199,6 @@ public class MyWardrobeActivity extends AppCompatActivity implements ImageAdapte
         super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
     }
-
-
 
 
 }
